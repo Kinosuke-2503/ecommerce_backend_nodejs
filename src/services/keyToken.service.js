@@ -11,10 +11,18 @@ class KeyTokenService {
 
             const tokens = await keyTokenModel.findOneAndUpdate(filter, update, options)
 
-            return token ? token.publicKey : null
+            return tokens ? tokens.publicKey : null
         } catch (error) {
             return error
         }
+    }
+
+    static findByUserId = async (userId) => {
+        return keyTokenModel.findOne({ user: userId }).lean()
+    }
+
+    static removeKeyById = async (id) => {
+        return keyTokenModel.deleteOne(id)
     }
 }
 
