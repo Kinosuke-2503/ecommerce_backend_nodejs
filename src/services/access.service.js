@@ -18,6 +18,10 @@ const ROLE_SHOP = {
 }
 
 class AccessService {
+    static logout = async (keyStore) => {
+        return KeyTokenService.removeKeyById(keyStore._id)
+    }
+
     static login = async ({ email, password, refreshToken = null }) => {
         const shop = await findByEmail({ email })
 
